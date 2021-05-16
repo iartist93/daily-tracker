@@ -7,7 +7,7 @@ import EntrySlider from "./EntrySlider";
 import EntryStepper from "./EntryStepper";
 import styled, { css } from "@emotion/native";
 import { blue, white, lightPurp, purple } from "../utils/colors";
-import { Row } from "../styles/styles";
+import { Centered, Row } from "../styles/styles";
 
 const Button = styled.TouchableHighlight`
   align-items: center;
@@ -19,8 +19,10 @@ const Button = styled.TouchableHighlight`
 `;
 
 const ButtonText = styled.Text`
+  font-family: "Cochin";
   color: white;
   font-size: 30px;
+  font-weight: 900;
 `;
 
 const SubmitButton = ({ onPress }) => {
@@ -64,15 +66,14 @@ const AddEntry = () => {
   const metricMeta = getMetricDataInfo();
 
   return (
-    <View>
+    <Centered>
       <DateHeader date={new Date().toLocaleDateString()} />
       {Object.keys(metricMeta).map((key) => {
         const { type, getIcon, displayName, ...rest } = metricMeta[key];
         const value = metrics[key];
 
         return (
-          <Row centered key={key}>
-            {/* <Text>{displayName}</Text> */}
+          <Row centered spaced key={key} style={{ marginBottom: 10 }}>
             {getIcon()}
             {type === "slider" ? (
               <EntrySlider
@@ -93,7 +94,7 @@ const AddEntry = () => {
         );
       })}
       <SubmitButton onPress={submit} />
-    </View>
+    </Centered>
   );
 };
 

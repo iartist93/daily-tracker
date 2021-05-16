@@ -7,7 +7,8 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { View, Text } from "react-native";
-import { blue } from "../utils/colors";
+
+import styled, { css } from "@emotion/native";
 
 export function isBetween(num, x, y) {
   if (num >= x && num <= y) {
@@ -53,6 +54,10 @@ export function timeToString(time = Date.now()) {
   return todayUTC.toISOString().split("T")[0];
 }
 
+const MetricIcon = styled.View`
+  margin: 0 30px;
+`;
+
 /**
  * Default config for each metric
  * @param {*} metric _optional_ [run - bike - swim - eat - sleep]
@@ -67,9 +72,9 @@ export const getMetricDataInfo = (metric) => {
       step: 1,
       type: "stepper",
       getIcon: () => (
-        <View>
-          <MaterialIcons name="bike-scooter" color="black" size={35} />
-        </View>
+        <MetricIcon>
+          <MaterialIcons name="bike-scooter" color="black" size={50} />
+        </MetricIcon>
       ),
     },
     run: {
@@ -79,9 +84,9 @@ export const getMetricDataInfo = (metric) => {
       step: 1,
       type: "stepper",
       getIcon: () => (
-        <View>
-          <MaterialIcons name="directions-run" color="black" size={35} />
-        </View>
+        <MetricIcon>
+          <MaterialIcons name="directions-run" color="black" size={50} />
+        </MetricIcon>
       ),
     },
     swim: {
@@ -91,9 +96,9 @@ export const getMetricDataInfo = (metric) => {
       step: 100,
       type: "stepper",
       getIcon: () => (
-        <View>
-          <MaterialCommunityIcons name="swim" color="black" size={35} />
-        </View>
+        <MetricIcon>
+          <MaterialCommunityIcons name="swim" color="black" size={50} />
+        </MetricIcon>
       ),
     },
     eat: {
@@ -103,9 +108,9 @@ export const getMetricDataInfo = (metric) => {
       step: 1,
       type: "slider",
       getIcon: () => (
-        <View>
-          <MaterialCommunityIcons name="food" color="black" size={35} />
-        </View>
+        <MetricIcon>
+          <MaterialCommunityIcons name="food" color="black" size={50} />
+        </MetricIcon>
       ),
     },
     sleep: {
@@ -115,9 +120,9 @@ export const getMetricDataInfo = (metric) => {
       step: 1,
       type: "slider",
       getIcon: () => (
-        <View>
-          <MaterialCommunityIcons name="sleep" color="black" size={35} />
-        </View>
+        <MetricIcon>
+          <MaterialCommunityIcons name="sleep" color="black" size={50} />
+        </MetricIcon>
       ),
     },
   };
