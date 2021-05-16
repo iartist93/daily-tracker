@@ -6,7 +6,8 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { blue } from "../utils/colors";
 
 export function isBetween(num, x, y) {
   if (num >= x && num <= y) {
@@ -65,11 +66,11 @@ export const getMetricDataInfo = (metric) => {
       unit: "miles",
       step: 1,
       type: "stepper",
-      getIcon: () => {
+      getIcon: () => (
         <View>
-          <MaterialIcons name="directions-bike" color="black" size={35} />
-        </View>;
-      },
+          <MaterialIcons name="bike-scooter" color={blue} size={35} />
+        </View>
+      ),
     },
     run: {
       displayName: "Run",
@@ -77,11 +78,11 @@ export const getMetricDataInfo = (metric) => {
       unit: "miles",
       step: 1,
       type: "stepper",
-      getIcon: () => {
+      getIcon: () => (
         <View>
           <MaterialIcons name="directions-run" color="black" size={35} />
-        </View>;
-      },
+        </View>
+      ),
     },
     swim: {
       displayName: "Swim",
@@ -89,11 +90,11 @@ export const getMetricDataInfo = (metric) => {
       unit: "meters",
       step: 100,
       type: "stepper",
-      getIcon: () => {
+      getIcon: () => (
         <View>
           <MaterialCommunityIcons name="swim" color="black" size={35} />
-        </View>;
-      },
+        </View>
+      ),
     },
     eat: {
       displayName: "Eat",
@@ -101,11 +102,11 @@ export const getMetricDataInfo = (metric) => {
       unit: "rating",
       step: 1,
       type: "slider",
-      getIcon: () => {
+      getIcon: () => (
         <View>
           <MaterialCommunityIcons name="food" color="black" size={35} />
-        </View>;
-      },
+        </View>
+      ),
     },
     sleep: {
       displayName: "Sleep",
@@ -113,11 +114,11 @@ export const getMetricDataInfo = (metric) => {
       unit: "hours",
       step: 1,
       type: "slider",
-      getIcon: () => {
+      getIcon: () => (
         <View>
           <MaterialCommunityIcons name="sleep" color="black" size={35} />
-        </View>;
-      },
+        </View>
+      ),
     },
   };
   return metric ? info[metric] : info;
