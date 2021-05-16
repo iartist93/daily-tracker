@@ -5,14 +5,29 @@ import { getMetricDataInfo } from "../utils/helpers";
 import DateHeader from "./DateHeader";
 import EntrySlider from "./EntrySlider";
 import EntryStepper from "./EntryStepper";
+import styled, { css } from "@emotion/native";
+import { blue, white, lightPurp, purple } from "../utils/colors";
+import { Row } from "../styles/styles";
+
+const Button = styled.TouchableHighlight`
+  align-items: center;
+  justify-content: center;
+  background-color: ${blue};
+  width: 200px;
+  padding: 10px;
+  border-radius: 2px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
+  font-size: 30px;
+`;
 
 const SubmitButton = ({ onPress }) => {
   return (
-    <TouchableHighlight onPress={onPress}>
-      <View>
-        <Text>Submit</Text>
-      </View>
-    </TouchableHighlight>
+    <Button onPress={onPress} underlayColor={lightPurp}>
+      <ButtonText>Submit</ButtonText>
+    </Button>
   );
 };
 
@@ -56,8 +71,8 @@ const AddEntry = () => {
         const value = metrics[key];
 
         return (
-          <View key={key}>
-            <Text>{displayName}</Text>
+          <Row centered key={key}>
+            {/* <Text>{displayName}</Text> */}
             {getIcon()}
             {type === "slider" ? (
               <EntrySlider
@@ -74,7 +89,7 @@ const AddEntry = () => {
                 onDecrement={() => decrement(key)}
               />
             )}
-          </View>
+          </Row>
         );
       })}
       <SubmitButton onPress={submit} />

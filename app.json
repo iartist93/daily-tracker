@@ -1,12 +1,10 @@
 {
-  "name": "test-react-native",
-  "displayName": "test-react-native",
+  "name": "daily-tracker",
+  "displayName": "daily-tracker",
   "expo": {
-    "name": "test-react-native",
-    "slug": "test-react-native",
+    "name": "daily-tracker",
+    "slug": "daily-tracker",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }

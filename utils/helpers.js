@@ -68,7 +68,7 @@ export const getMetricDataInfo = (metric) => {
       type: "stepper",
       getIcon: () => (
         <View>
-          <MaterialIcons name="bike-scooter" color={blue} size={35} />
+          <MaterialIcons name="bike-scooter" color="black" size={35} />
         </View>
       ),
     },
