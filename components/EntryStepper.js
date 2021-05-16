@@ -48,7 +48,7 @@ const EntryStepper = ({ value, unit, onIncrement, onDecrement }) => {
   return (
     <>
       {fontLoaded && (
-        <Row centered fullwidth spaced>
+        <Row alignCenter fullwidth justifySpace>
           <Row>
             <Button onPress={onDecrement} underlayColor={lightPurp}>
               <FontAwesome name="minus" color="white" size={30} />

@@ -1,10 +1,14 @@
 import styled, { css } from "@emotion/native";
 
-const centeredMixin = css`
+const alignCenteredMixin = css`
   align-items: center;
 `;
 
-const spacedMixin = css`
+const justifyCenteredMixin = css`
+  justify-content: center;
+`;
+
+const justifySpace = css`
   justify-content: space-between;
 `;
 
@@ -15,11 +19,14 @@ const fullwidthMixin = css`
 export const Row = styled.View`
   flex-direction: row;
 
-  ${(props) => props.centered && centeredMixin}
+  ${(props) => props.alignCenter && alignCenteredMixin}
+  ${(props) => props.justifyCenter && justifyCenteredMixin}
+  ${(props) => props.justifySpace && justifySpace}
   ${(props) => props.fullwidth && fullwidthMixin}
-  ${(props) => props.spaced && spacedMixin}
 `;
 
 export const Centered = styled.View`
-  ${centeredMixin};
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;

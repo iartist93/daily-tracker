@@ -37,7 +37,7 @@ const EntrySlider = ({ value, step, metric, unit, max, onChange }) => {
   }, []);
 
   return (
-    <Row centered fullwidth spaced>
+    <Row aligncenter fullwidth justifySpace>
       <Slider
         value={value}
         step={step}

@@ -7,7 +7,7 @@ import AddEntry from "./components/AddEntry";
 export default function App() {
   return (
     <View style={styles.container}>
-      <AddEntry />
+      <AddEntry isAlreadyLogged={false} />
     </View>
   );
 }

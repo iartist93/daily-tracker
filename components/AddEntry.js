@@ -8,6 +8,7 @@ import EntryStepper from "./EntryStepper";
 import styled, { css } from "@emotion/native";
 import { blue, white, lightPurp, purple } from "../utils/colors";
 import { Centered, Row } from "../styles/styles";
+import AlreadyLogged from "./AlreadyLogged";
 
 const Button = styled.TouchableHighlight`
   align-items: center;
@@ -33,7 +34,7 @@ const SubmitButton = ({ onPress }) => {
   );
 };
 
-const AddEntry = () => {
+const AddEntry = ({ isAlreadyLogged }) => {
   const [metrics, setMetrics] = useState({
     bike: 0,
     run: 0,
@@ -67,33 +68,44 @@ const AddEntry = () => {
 
   return (
     <Centered>
-      <DateHeader date={new Date().toLocaleDateString()} />
-      {Object.keys(metricMeta).map((key) => {
-        const { type, getIcon, displayName, ...rest } = metricMeta[key];
-        const value = metrics[key];
+      {!isAlreadyLogged ? (
+        <>
+          <DateHeader date={new Date().toLocaleDateString()} />
+          {Object.keys(metricMeta).map((key) => {
+            const { type, getIcon, displayName, ...rest } = metricMeta[key];
+            const value = metrics[key];
 
-        return (
-          <Row centered spaced key={key} style={{ marginBottom: 10 }}>
-            {getIcon()}
-            {type === "slider" ? (
-              <EntrySlider
-                metric={key}
-                value={value}
-                {...rest}
-                onChange={(value) => slide(key, value)}
-              />
-            ) : (
-              <EntryStepper
-                value={value}
-                {...rest}
-                onIncrement={() => increment(key)}
-                onDecrement={() => decrement(key)}
-              />
-            )}
-          </Row>
-        );
-      })}
-      <SubmitButton onPress={submit} />
+            return (
+              <Row
+                alignCenter
+                justifySpace
+                key={key}
+                style={{ marginBottom: 10 }}
+              >
+                {getIcon()}
+                {type === "slider" ? (
+                  <EntrySlider
+                    metric={key}
+                    value={value}
+                    {...rest}
+                    onChange={(value) => slide(key, value)}
+                  />
+                ) : (
+                  <EntryStepper
+                    value={value}
+                    {...rest}
+                    onIncrement={() => increment(key)}
+                    onDecrement={() => decrement(key)}
+                  />
+                )}
+              </Row>
+            );
+          })}
+          <SubmitButton onPress={submit} />
+        </>
+      ) : (
+        <AlreadyLogged />
+      )}
     </Centered>
   );
 };
