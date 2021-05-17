@@ -1,9 +1,12 @@
-import React from "react";
-import { View, Text } from "react-native";
-import styled from "@emotion/native";
-import { Centered, Row } from "../styles/styles";
-import { Fontisto } from "@expo/vector-icons";
-import { useFonts, RobotoMono_500Medium } from "@expo-google-fonts/roboto-mono";
+import React from 'react';
+import { View, Text } from 'react-native';
+import styled from '@emotion/native';
+import { Centered, Row } from '../styles/styles';
+import { Fontisto } from '@expo/vector-icons';
+import { useFonts, RobotoMono_500Medium } from '@expo-google-fonts/roboto-mono';
+
+import * as API from '../utils/api';
+import { timeToString } from '../utils/helpers';
 
 const Message = styled.Text`
   font-size: 20px;
@@ -20,7 +23,7 @@ const AlreadyLogged = () => {
 
   return (
     <Centered>
-      <Fontisto name="smiley" color="black" size={100} />
+      <Fontisto name='smiley' color='black' size={100} />
       <Message> You have already logged data for today! </Message>
     </Centered>
   );

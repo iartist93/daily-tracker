@@ -32,3 +32,16 @@ TBA
 - **NOTE** Make sure you have the simulator/emulator/device already opened before running those commands otherwise they will fail to run.
 
 ---
+
+## TODO List
+
+- [ ] Try to implement typescript style library for this app.
+- [ ] Implement `TextButton` - `FlatButton` - `OutlinedButton`
+
+---
+
+## Tasks
+
+- [ ] `rest()` reset the state to default values + save state to local storage + go back to the homepage.
+
+---

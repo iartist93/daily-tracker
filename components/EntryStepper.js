@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
 
-import { FontAwesome } from "@expo/vector-icons";
-import { Centered, Row } from "../styles/styles";
-import styled, { css } from "@emotion/native";
-import { blue, lightPurp } from "../utils/colors";
+import { FontAwesome } from '@expo/vector-icons';
+import { Centered, Row } from '../styles/styles';
+import styled, { css } from '@emotion/native';
+import { blue, lightPurp } from '../utils/colors';
 
 import {
   useFonts,
   RobotoMono_400Regular,
   RobotoMono_500Medium,
   RobotoMono_700Bold,
-} from "@expo-google-fonts/roboto-mono";
+} from '@expo-google-fonts/roboto-mono';
 
 const Button = styled.TouchableHighlight`
   width: 50px;
@@ -51,14 +51,14 @@ const EntryStepper = ({ value, unit, onIncrement, onDecrement }) => {
         <Row alignCenter fullwidth justifySpace>
           <Row>
             <Button onPress={onDecrement} underlayColor={lightPurp}>
-              <FontAwesome name="minus" color="white" size={30} />
+              <FontAwesome name='minus' color='white' size={30} />
             </Button>
             <Button onPress={onIncrement} underlayColor={lightPurp}>
-              <FontAwesome name="plus" color="white" size={30} />
+              <FontAwesome name='plus' color='white' size={30} />
             </Button>
           </Row>
           <InfoContainer>
-            <InfoText style={{ fontFamily: "RobotoMono_700Bold" }}>
+            <InfoText style={{ fontFamily: 'RobotoMono_700Bold' }}>
               {value}
             </InfoText>
             <InfoText>{unit}</InfoText>

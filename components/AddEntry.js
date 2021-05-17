@@ -1,14 +1,17 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
-import { getMetricDataInfo } from "../utils/helpers";
-import DateHeader from "./DateHeader";
-import EntrySlider from "./EntrySlider";
-import EntryStepper from "./EntryStepper";
-import styled, { css } from "@emotion/native";
-import { blue, white, lightPurp, purple } from "../utils/colors";
-import { Centered, Row } from "../styles/styles";
-import AlreadyLogged from "./AlreadyLogged";
+import React, { useState } from 'react';
+import styled from '@emotion/native';
+
+import { getMetricDataInfo, timeToString } from '../utils/helpers';
+import DateHeader from './DateHeader';
+import EntrySlider from './EntrySlider';
+import EntryStepper from './EntryStepper';
+import { blue, lightPurp } from '../utils/colors';
+import { Centered, Row } from '../styles/styles';
+import AlreadyLogged from './AlreadyLogged';
+import * as API from '../utils/api';
+
+//-----------------------------------------------------------------------//
+// Styled Components
 
 const Button = styled.TouchableHighlight`
   align-items: center;
@@ -20,11 +23,14 @@ const Button = styled.TouchableHighlight`
 `;
 
 const ButtonText = styled.Text`
-  font-family: "Cochin";
+  font-family: 'Cochin';
   color: white;
   font-size: 30px;
   font-weight: 900;
 `;
+
+//-----------------------------------------------------------------------//
+// Helpers
 
 const SubmitButton = ({ onPress }) => {
   return (
@@ -34,14 +40,19 @@ const SubmitButton = ({ onPress }) => {
   );
 };
 
+const initalState = {
+  bike: 0,
+  run: 0,
+  swim: 0,
+  eat: 0,
+  sleep: 0,
+};
+
+//-----------------------------------------------------------------------//
+// AddEntry Component
+
 const AddEntry = ({ isAlreadyLogged }) => {
-  const [metrics, setMetrics] = useState({
-    bike: 0,
-    run: 0,
-    swim: 0,
-    eat: 0,
-    sleep: 0,
-  });
+  const [metrics, setMetrics] = useState(initalState);
 
   const increment = (metric) => {
     const { max, step } = getMetricDataInfo(metric);
@@ -60,8 +71,24 @@ const AddEntry = ({ isAlreadyLogged }) => {
     setMetrics({ ...metrics, [metric]: value });
   };
 
-  const submit = () => {
-    console.log("Pressed");
+  const resetState = () => {
+    setMetrics(initalState);
+  };
+
+  const handleSubmit = () => {
+    // TODO: replace with redux
+    // save data to local stoage
+    const key = timeToString();
+    console.log(key);
+    API.saveEntry(key, metrics);
+    resetState();
+  };
+
+  const handleReset = () => {
+    //TODO: Replace with redux
+    const key = timeToString();
+    API.RemoveData(key);
+    resetState();
   };
 
   const metricMeta = getMetricDataInfo();
@@ -83,7 +110,7 @@ const AddEntry = ({ isAlreadyLogged }) => {
                 style={{ marginBottom: 10 }}
               >
                 {getIcon()}
-                {type === "slider" ? (
+                {type === 'slider' ? (
                   <EntrySlider
                     metric={key}
                     value={value}
@@ -101,10 +128,10 @@ const AddEntry = ({ isAlreadyLogged }) => {
               </Row>
             );
           })}
-          <SubmitButton onPress={submit} />
+          <SubmitButton onPress={handleSubmit} />
         </>
       ) : (
-        <AlreadyLogged />
+        <AlreadyLogged onReset={handleReset} />
       )}
     </Centered>
   );
