@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/native';
+import { connect } from 'react-redux';
 
 import { getMetricDataInfo, timeToString } from '../utils/helpers';
 import DateHeader from './DateHeader';
@@ -9,6 +10,7 @@ import { blue, lightPurp } from '../utils/colors';
 import { Centered, Row } from '../styles/styles';
 import AlreadyLogged from './AlreadyLogged';
 import * as API from '../utils/api';
+import { handleAddEntry, handleRemoveEntry } from '../redux/actions/entries.a';
 
 //-----------------------------------------------------------------------//
 // Styled Components
@@ -51,7 +53,7 @@ const initalState = {
 //-----------------------------------------------------------------------//
 // AddEntry Component
 
-const AddEntry = ({ isAlreadyLogged }) => {
+const AddEntry = ({ isAlreadyLogged, dispatch }) => {
   const [metrics, setMetrics] = useState(initalState);
 
   const increment = (metric) => {
@@ -76,23 +78,22 @@ const AddEntry = ({ isAlreadyLogged }) => {
   };
 
   const handleSubmit = () => {
-    // TODO: replace with redux
     // save data to local stoage
     const key = timeToString();
     console.log(key);
-    API.saveEntry(key, metrics);
+    dispatch(handleAddEntry(key, metrics));
     resetState();
   };
 
   const handleReset = () => {
-    //TODO: Replace with redux
     const key = timeToString();
-    API.RemoveData(key);
+    dispatch(handleRemoveEntry(key));
     resetState();
   };
 
   const metricMeta = getMetricDataInfo();
 
+  //-----------------------------------------
   return (
     <Centered>
       {!isAlreadyLogged ? (
@@ -129,6 +130,7 @@ const AddEntry = ({ isAlreadyLogged }) => {
             );
           })}
           <SubmitButton onPress={handleSubmit} />
+          <SubmitButton onPress={handleReset} />
         </>
       ) : (
         <AlreadyLogged onReset={handleReset} />
@@ -137,4 +139,6 @@ const AddEntry = ({ isAlreadyLogged }) => {
   );
 };
 
-export default AddEntry;
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps)(AddEntry);

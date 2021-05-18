@@ -1,22 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AddEntry from "./components/AddEntry";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import AddEntry from './components/AddEntry';
+import store from './redux/store.s';
+import { Provider } from 'react-redux';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AddEntry isAlreadyLogged={false} />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <AddEntry isAlreadyLogged={false} />
+      </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });

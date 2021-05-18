@@ -7,22 +7,27 @@ import { CALENDAR_STORAGE_KEY } from '../utils/_calendar';
  * @param {*} value - object to save
  */
 export const saveEntry = async (key, value) => {
+  const entry = { [key]: value };
+  const newData = JSON.stringify(entry);
   try {
-    const newData = JSON.stringify({ [key]: value });
     await AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, newData);
   } catch (e) {
-    // saving error
-    console.log('Error while saving data to local storage!');
+    console.error(
+      'Error while saving data to local storage!\n',
+      newData,
+      '\n',
+      e
+    );
   }
 };
 
 export const getAllEntries = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem(CALENDAR_STORAGE_KEY);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    return jsonValue != null ? await JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value
-    console.log('Error while reading data to local storage!');
+    console.error('Error while all entries data from local storage! ', e);
   }
 };
 
@@ -32,7 +37,7 @@ export const getEntry = async (key) => {
     return allEntries[key];
   } catch (e) {
     // error reading value
-    console.log(`Error while reading  skey ${key} to local storage!`);
+    console.error(`Error while reading  skey ${key} to local storage! `, e);
   }
 };
 
@@ -41,8 +46,8 @@ export const RemoveData = async (key) => {
     const allEntries = await getAllEntries();
     allEntries[key] = undefined;
     delete allEntries[key];
-    AsyncStorage.setItem(CALENDAR_STORAGE_KEY, allEntries);
+    AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(allEntries));
   } catch (e) {
-    console.log(`Error while removing key ${key} from local storage!`);
+    console.error(`Error while removing key ${key} from local storage! `, e);
   }
 };
