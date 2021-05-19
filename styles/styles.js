@@ -1,4 +1,4 @@
-import styled, { css } from "@emotion/native";
+import styled, { css } from '@emotion/native';
 
 const alignCenteredMixin = css`
   align-items: center;

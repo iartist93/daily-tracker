@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/native';
 import { connect } from 'react-redux';
-
+import { ScrollView, View } from 'react-native';
 import { getMetricDataInfo, timeToString } from '../utils/helpers';
 import DateHeader from './DateHeader';
 import EntrySlider from './EntrySlider';
@@ -95,47 +95,49 @@ const AddEntry = ({ isAlreadyLogged, dispatch }) => {
 
   //-----------------------------------------
   return (
-    <Centered>
+    <View style={{ flex: 1 }}>
       {!isAlreadyLogged ? (
-        <>
-          <DateHeader date={new Date().toLocaleDateString()} />
-          {Object.keys(metricMeta).map((key) => {
-            const { type, getIcon, displayName, ...rest } = metricMeta[key];
-            const value = metrics[key];
+        <ScrollView>
+          <Centered>
+            <DateHeader date={new Date().toLocaleDateString()} />
+            {Object.keys(metricMeta).map((key) => {
+              const { type, getIcon, displayName, ...rest } = metricMeta[key];
+              const value = metrics[key];
 
-            return (
-              <Row
-                alignCenter
-                justifySpace
-                key={key}
-                style={{ marginBottom: 10 }}
-              >
-                {getIcon()}
-                {type === 'slider' ? (
-                  <EntrySlider
-                    metric={key}
-                    value={value}
-                    {...rest}
-                    onChange={(value) => slide(key, value)}
-                  />
-                ) : (
-                  <EntryStepper
-                    value={value}
-                    {...rest}
-                    onIncrement={() => increment(key)}
-                    onDecrement={() => decrement(key)}
-                  />
-                )}
-              </Row>
-            );
-          })}
-          <SubmitButton onPress={handleSubmit} />
-          <SubmitButton onPress={handleReset} />
-        </>
+              return (
+                <Row
+                  alignCenter
+                  justifySpace
+                  key={key}
+                  style={{ marginBottom: 10 }}
+                >
+                  {getIcon()}
+                  {type === 'slider' ? (
+                    <EntrySlider
+                      metric={key}
+                      value={value}
+                      {...rest}
+                      onChange={(value) => slide(key, value)}
+                    />
+                  ) : (
+                    <EntryStepper
+                      value={value}
+                      {...rest}
+                      onIncrement={() => increment(key)}
+                      onDecrement={() => decrement(key)}
+                    />
+                  )}
+                </Row>
+              );
+            })}
+            <SubmitButton onPress={handleSubmit} />
+            <SubmitButton onPress={handleReset} />
+          </Centered>
+        </ScrollView>
       ) : (
         <AlreadyLogged onReset={handleReset} />
       )}
-    </Centered>
+    </View>
   );
 };
 
