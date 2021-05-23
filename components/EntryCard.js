@@ -1,15 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import styled from '@emotion/native';
 import { getMetricDataInfo } from '../utils/helpers';
 import { Row } from '../styles/styles';
 import { purple } from '../utils/colors';
 
-const Card = styled(View)`
+const Card = styled.View`
   background-color: white;
   border-radius: 10px;
   margin: 20px;
-  box-shadow: -2px -2px 4px #f0f0f0;
   padding: 20px;
 `;
 
@@ -35,7 +34,7 @@ const metricsInfo = getMetricDataInfo();
 const EntryCard = ({ index, item }) => {
   const [key, values] = item;
   return (
-    <Card>
+    <Card style={styles.shadow}>
       <Date>{key}</Date>
       {Object.keys(metricsInfo).map((metric) => {
         const metricInfo = metricsInfo[metric];
@@ -56,3 +55,18 @@ const EntryCard = ({ index, item }) => {
 };
 
 export default EntryCard;
+
+//NOTE:: can't use box shadow with @emotion
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#84878A',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+});
