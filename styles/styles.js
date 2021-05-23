@@ -16,6 +16,12 @@ const fullwidthMixin = css`
   flex: 1;
 `;
 
+/**
+ * TODO: Convert to typescrip component
+ * Display contnet in row
+ *
+ * Options : `alignCenter`, `justifyCenter`, `justifySpace`, `fullwidth`
+ */
 export const Row = styled.View`
   flex-direction: row;
 
@@ -25,8 +31,16 @@ export const Row = styled.View`
   ${(props) => props.fullwidth && fullwidthMixin}
 `;
 
+/**
+ * Center the content vertically and horizontally
+ */
 export const Centered = styled.View`
   align-items: center;
   justify-content: center;
   flex: 1;
+`;
+
+export const Container = styled.View`
+  flex: 1;
+  padding: 15px;
 `;

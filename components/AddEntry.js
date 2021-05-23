@@ -80,7 +80,6 @@ const AddEntry = ({ isAlreadyLogged, dispatch }) => {
   const handleSubmit = () => {
     // save data to local stoage
     const key = timeToString();
-    console.log(key);
     dispatch(handleAddEntry(key, metrics));
     resetState();
   };

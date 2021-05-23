@@ -20,7 +20,9 @@ export default function App() {
   const Tab = createBottomTabNavigator();
 
   const AddNewRoute = () => <AddEntry isAlreadyLogged={false} />;
-  const TimelineRoute = () => <Timeline />;
+  const TimelineRoute = () => (
+    <Timeline something='Something is passed there' />
+  );
 
   return (
     <NavigationContainer>

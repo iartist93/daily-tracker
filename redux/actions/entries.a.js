@@ -1,6 +1,6 @@
 import * as API from '../../utils/api';
 
-//---------------------------------------- Exports
+//---------------------------------------- Constants
 
 export const RECIEVE_ENTIRES = 'RECIEVE_ENTIRES';
 export const ADD_ENTRY = 'ADD_ENTRY ';
