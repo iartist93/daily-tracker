@@ -1,7 +1,9 @@
 const logger = (store) => (next) => (action) => {
-  console.log(action.type);
+  console.group(`${action.type}`);
+  console.log('Looger ', action.type);
   next(action);
-  console.log(store.getState());
+  console.log('Logger ', store.getState());
+  console.groupEnd();
 };
 
 export default logger;

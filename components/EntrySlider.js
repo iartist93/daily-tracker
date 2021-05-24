@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import Slider from "@react-native-community/slider";
-import { Centered, Row } from "../styles/styles";
-import styled, { css } from "@emotion/native";
+import React, { useEffect } from 'react';
+import Slider from '@react-native-community/slider';
+import { Centered, Row } from '../styles/styles';
+import styled, { css } from '@emotion/native';
 
 import {
   useFonts,
   RobotoMono_400Regular,
   RobotoMono_500Medium,
   RobotoMono_700Bold,
-} from "@expo-google-fonts/roboto-mono";
+} from '@expo-google-fonts/roboto-mono';
 
 const InfoContainer = styled.View`
   width: 120px;
@@ -20,7 +20,7 @@ const InfoContainer = styled.View`
 `;
 
 const InfoText = styled.Text`
-  font-size: 25px;
+  font-size: 20px;
   font-family: RobotoMono_400Regular;
   color: black;
 `;
@@ -31,10 +31,6 @@ const EntrySlider = ({ value, step, metric, unit, max, onChange }) => {
     RobotoMono_500Medium,
     RobotoMono_700Bold,
   });
-
-  useEffect(() => {
-    console.log("mounted!");
-  }, []);
 
   return (
     <Row aligncenter fullwidth justifySpace>
@@ -47,7 +43,7 @@ const EntrySlider = ({ value, step, metric, unit, max, onChange }) => {
         style={{ flex: 1 }}
       />
       <InfoContainer>
-        <InfoText style={{ fontFamily: "RobotoMono_700Bold" }}>
+        <InfoText style={{ fontFamily: 'RobotoMono_700Bold' }}>
           {value}
         </InfoText>
         <InfoText>{unit}</InfoText>

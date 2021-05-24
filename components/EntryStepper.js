@@ -20,7 +20,7 @@ const Button = styled.TouchableHighlight`
   background-color: ${blue};
   margin: 0 10px;
   padding: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
 `;
 
 const InfoContainer = styled.View`
@@ -33,7 +33,7 @@ const InfoContainer = styled.View`
 `;
 
 const InfoText = styled.Text`
-  font-size: 25px;
+  font-size: 20px;
   font-family: RobotoMono_400Regular;
   color: black;
 `;

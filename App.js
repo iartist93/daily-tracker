@@ -6,7 +6,7 @@ import AddEntry from './components/AddEntry';
 import store from './redux/store.s';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
-import { blue } from './utils/colors';
+import { blue, purple } from './utils/colors';
 import Timeline from './components/Timeline';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
@@ -21,7 +21,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function App() {
   const Tab = createBottomTabNavigator();
 
-  const AddNewRoute = () => <AddEntry isAlreadyLogged={false} />;
+  const AddNewRoute = () => <AddEntry />;
   const TimelineRoute = () => (
     <Timeline something='Something is passed there' />
   );
@@ -41,8 +41,8 @@ export default function App() {
                 labelStyle: {
                   fontSize: 15,
                 },
-                activeTintColor: 'blue',
-                inactiveTintColor: 'red',
+                activeTintColor: blue,
+                inactiveTintColor: 'black',
               }}
             >
               <Tab.Screen
@@ -54,7 +54,7 @@ export default function App() {
                     <MaterialCommunityIcons
                       name='home'
                       size={30}
-                      color='blue'
+                      color={blue}
                     />
                   ),
                 }}
@@ -65,7 +65,11 @@ export default function App() {
                 options={{
                   title: 'Timeline',
                   tabBarIcon: () => (
-                    <MaterialCommunityIcons name='post' size={30} color='red' />
+                    <MaterialCommunityIcons
+                      name='post'
+                      size={30}
+                      color='#464649'
+                    />
                   ),
                 }}
               />

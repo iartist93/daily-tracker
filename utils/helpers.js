@@ -71,7 +71,7 @@ export const getMetricDataInfo = (metric) => {
       unit: 'miles',
       step: 1,
       type: 'stepper',
-      getIcon: (size) => (
+      getIcon: (size = 50) => (
         <MetricIcon>
           <MaterialIcons name='bike-scooter' color='black' size={size} />
         </MetricIcon>
@@ -83,7 +83,7 @@ export const getMetricDataInfo = (metric) => {
       unit: 'miles',
       step: 1,
       type: 'stepper',
-      getIcon: (size) => (
+      getIcon: (size = 50) => (
         <MetricIcon>
           <MaterialIcons name='directions-run' color='black' size={size} />
         </MetricIcon>
@@ -95,7 +95,7 @@ export const getMetricDataInfo = (metric) => {
       unit: 'meters',
       step: 100,
       type: 'stepper',
-      getIcon: (size) => (
+      getIcon: (size = 50) => (
         <MetricIcon>
           <MaterialCommunityIcons name='swim' color='black' size={size} />
         </MetricIcon>
@@ -107,7 +107,7 @@ export const getMetricDataInfo = (metric) => {
       unit: 'rating',
       step: 1,
       type: 'slider',
-      getIcon: (size) => (
+      getIcon: (size = 50) => (
         <MetricIcon>
           <MaterialCommunityIcons name='food' color='black' size={size} />
         </MetricIcon>
@@ -119,7 +119,7 @@ export const getMetricDataInfo = (metric) => {
       unit: 'hours',
       step: 1,
       type: 'slider',
-      getIcon: (size) => (
+      getIcon: (size = 50) => (
         <MetricIcon>
           <MaterialCommunityIcons name='sleep' color='black' size={size} />
         </MetricIcon>

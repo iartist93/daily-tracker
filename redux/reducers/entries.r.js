@@ -6,11 +6,13 @@ const entries = (state = {}, action) => {
       return { ...state, ...action.entries };
     case ADD_ENTRY:
       return { ...state, ...action.entry };
-    case REMOVE_ENTRY:
-      const newState = state;
+    case REMOVE_ENTRY: {
+      const newState = { ...state };
       newState[action.key] = undefined;
       delete newState[action.key];
+      console.log('Reducer ', newState);
       return newState;
+    }
     default:
       return state;
   }

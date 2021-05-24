@@ -21,7 +21,7 @@ const Button = styled.TouchableHighlight`
   background-color: ${blue};
   width: 200px;
   padding: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
 `;
 
 const ButtonText = styled.Text`
@@ -33,14 +33,6 @@ const ButtonText = styled.Text`
 
 //-----------------------------------------------------------------------//
 // Helpers
-
-const SubmitButton = ({ onPress }) => {
-  return (
-    <Button onPress={onPress} underlayColor={lightPurp}>
-      <ButtonText>Submit</ButtonText>
-    </Button>
-  );
-};
 
 const initalState = {
   bike: 0,
@@ -54,6 +46,8 @@ const initalState = {
 // AddEntry Component
 
 const AddEntry = ({ isAlreadyLogged, dispatch }) => {
+  console.log('isAlreadyLogged ', isAlreadyLogged);
+
   const [metrics, setMetrics] = useState(initalState);
 
   const increment = (metric) => {
@@ -73,21 +67,20 @@ const AddEntry = ({ isAlreadyLogged, dispatch }) => {
     setMetrics({ ...metrics, [metric]: value });
   };
 
-  const resetState = () => {
+  const resetComponentState = () => {
     setMetrics(initalState);
   };
 
   const handleSubmit = () => {
-    // save data to local stoage
     const key = timeToString();
     dispatch(handleAddEntry(key, metrics));
-    resetState();
+    resetComponentState();
   };
 
   const handleReset = () => {
     const key = timeToString();
     dispatch(handleRemoveEntry(key));
-    resetState();
+    resetComponentState();
   };
 
   const metricMeta = getMetricDataInfo();
@@ -129,8 +122,12 @@ const AddEntry = ({ isAlreadyLogged, dispatch }) => {
                 </Row>
               );
             })}
-            <SubmitButton onPress={handleSubmit} />
-            <SubmitButton onPress={handleReset} />
+            <Button onPress={handleSubmit} underlayColor={lightPurp}>
+              <ButtonText>Submit</ButtonText>
+            </Button>
+            {/* <Button onPress={handleReset} underlayColor={lightPurp}>
+              <ButtonText>Submit</ButtonText>
+            </Button> */}
           </Centered>
         </ScrollView>
       ) : (
@@ -140,6 +137,15 @@ const AddEntry = ({ isAlreadyLogged, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  console.log('state ', state);
+  const entryIndex = Object.keys(state.entries).findIndex(
+    (key) => key === timeToString()
+  );
+  console.log('entryIndex ', entryIndex);
+  return {
+    isAlreadyLogged: state.entries === {} || entryIndex >= 0,
+  };
+};
 
 export default connect(mapStateToProps)(AddEntry);

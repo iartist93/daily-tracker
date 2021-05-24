@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { TouchableHighlight, View, Text } from 'react-native';
 import styled from '@emotion/native';
 import { Centered, Row } from '../styles/styles';
 import { Fontisto } from '@expo/vector-icons';
 import { useFonts, RobotoMono_500Medium } from '@expo-google-fonts/roboto-mono';
-
-import * as API from '../utils/api';
-import { timeToString } from '../utils/helpers';
+import { purple, lightPurp } from '../utils/colors';
 
 const Message = styled.Text`
   font-size: 20px;
@@ -16,7 +14,11 @@ const Message = styled.Text`
   margin-top: 30px;
 `;
 
-const AlreadyLogged = () => {
+const TextButton = styled.TouchableHighlight`
+  margin-top: 20px;
+`;
+
+const AlreadyLogged = ({ onReset }) => {
   const [fontLoaded] = useFonts({
     RobotoMono_500Medium,
   });
@@ -25,6 +27,9 @@ const AlreadyLogged = () => {
     <Centered>
       <Fontisto name='smiley' color='black' size={100} />
       <Message> You have already logged data for today! </Message>
+      <TextButton onPress={onReset} underlayColor={lightPurp}>
+        <Text style={{ color: purple, fontSize: 25 }}>Reset</Text>
+      </TextButton>
     </Centered>
   );
 };
