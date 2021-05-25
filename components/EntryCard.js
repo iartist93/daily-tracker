@@ -1,24 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import styled from '@emotion/native';
-import { getMetricDataInfo } from '../utils/helpers';
-import { Row } from '../styles/styles';
-import { purple } from '../utils/colors';
-
-const Card = styled.View`
-  background-color: white;
-  border-radius: 10px;
-  margin: 20px;
-  padding: 20px;
-`;
-
-const Date = styled.Text`
-  font-size: 26px;
-  font-weight: 900;
-  color: black;
-  margin-bottom: 15px;
-  color: ${purple};
-`;
+import { getMetricDataInfo, timeToString } from '../utils/helpers';
+import { Row, Card, DateHeader } from '../styles/styles';
+import EmptyCard from './EmptyCard';
 
 const MetricName = styled.Text`
   font-size: 20px;
@@ -32,31 +17,37 @@ const MetricValue = styled.Text`
 const metricsInfo = getMetricDataInfo();
 
 const EntryCard = ({ index, item }) => {
-  const [key, values] = item;
+  const [key, value] = item;
+
   return (
-    <Card style={styles.shadow}>
-      <Date>{key}</Date>
-      {Object.keys(metricsInfo).map((metric) => {
-        const metricInfo = metricsInfo[metric];
-        return (
-          <Row alignCenter key={metric} style={{ marginBottom: 8 }}>
-            {metricInfo.getIcon(40)}
-            <View style={{ alignItems: 'flex-start' }}>
-              <MetricName>{metricInfo.displayName}</MetricName>
-              <MetricValue>
-                {values[metric]} {metricInfo.unit}
-              </MetricValue>
-            </View>
-          </Row>
-        );
-      })}
-    </Card>
+    <>
+      {!value ? (
+        <EmptyCard entryDate={key} />
+      ) : (
+        <Card style={styles.shadow}>
+          <View key={key}>
+            <DateHeader>{key}</DateHeader>
+            {Object.keys(metricsInfo).map((metric) => {
+              const metricInfo = metricsInfo[metric];
+              return (
+                <Row alignCenter key={metric} style={{ marginBottom: 8 }}>
+                  {metricInfo.getIcon(40)}
+                  <View style={{ alignItems: 'flex-start' }}>
+                    <MetricName>{metricInfo.displayName}</MetricName>
+                    <MetricValue>
+                      {value[metric]} {metricInfo.unit}
+                    </MetricValue>
+                  </View>
+                </Row>
+              );
+            })}
+          </View>
+        </Card>
+      )}
+    </>
   );
 };
 
-export default EntryCard;
-
-//NOTE:: can't use box shadow with @emotion
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: '#84878A',
@@ -70,3 +61,5 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
+
+export default EntryCard;

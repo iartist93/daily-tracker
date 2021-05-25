@@ -1,5 +1,7 @@
 import styled, { css } from '@emotion/native';
 
+import { blue, purple } from '../utils/colors';
+
 const alignCenteredMixin = css`
   align-items: center;
 `;
@@ -43,4 +45,19 @@ export const Centered = styled.View`
 export const Container = styled.View`
   flex: 1;
   padding: 15px;
+`;
+
+export const Card = styled.View`
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+`;
+
+export const DateHeader = styled.Text`
+  font-size: 26px;
+  font-weight: 900;
+  color: black;
+  margin-bottom: 15px;
+  color: ${purple};
 `;

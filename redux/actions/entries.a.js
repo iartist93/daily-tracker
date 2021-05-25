@@ -1,4 +1,6 @@
 import * as API from '../../utils/api';
+import { timeToString } from '../../utils/helpers';
+import { formatCalendarResults } from '../../utils/_calendar';
 
 //---------------------------------------- Constants
 
@@ -49,5 +51,23 @@ export const handleRemoveEntry = (key) => {
   return async (dispatch) => {
     await API.RemoveData(key);
     dispatch(removeEntry(key));
+  };
+};
+
+export const handleRecieveEntries = () => {
+  return async (dispatch) => {
+    const storedEntries = await API.getAllEntries();
+    //TODO:: uncomment this
+    // const allEntries = formatCalendarResults(storedEntries);
+    const allEntries = formatCalendarResults(null);
+    dispatch(recieveEntries(allEntries));
+
+    //if there's no entry for today, add a new empty entry
+    if (!allEntries[timeToString()]) {
+      console.log(
+        '-====================> No log for today while recieving data'
+      );
+      dispatch(addEntry({ [timeToString()]: null }));
+    }
   };
 };

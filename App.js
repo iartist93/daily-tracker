@@ -1,30 +1,28 @@
 import 'react-native-gesture-handler';
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import AddEntry from './components/AddEntry';
+import History from './components/History';
 import store from './redux/store.s';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
-import { blue, purple } from './utils/colors';
-import Timeline from './components/Timeline';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  BottomTabBar,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { blue, purple } from './utils/colors';
+import { handleRecieveEntries } from './redux/actions/entries.a';
 
+//------------------------------------------------------
 export default function App() {
   const Tab = createBottomTabNavigator();
-
   const AddNewRoute = () => <AddEntry />;
-  const TimelineRoute = () => (
-    <Timeline something='Something is passed there' />
-  );
+  const HistoryRoute = () => <History />;
+
+  useEffect(() => {
+    // load data from db and save it in the store
+    store.dispatch(handleRecieveEntries());
+  }, []);
 
   return (
     <NavigationContainer>
@@ -46,7 +44,7 @@ export default function App() {
               }}
             >
               <Tab.Screen
-                name='Home'
+                name='AddNew'
                 component={AddNewRoute}
                 options={{
                   title: 'Add New',
@@ -60,8 +58,8 @@ export default function App() {
                 }}
               />
               <Tab.Screen
-                name='Settings'
-                component={TimelineRoute}
+                name='History'
+                component={HistoryRoute}
                 options={{
                   title: 'Timeline',
                   tabBarIcon: () => (

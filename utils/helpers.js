@@ -54,6 +54,17 @@ export function timeToString(time = Date.now()) {
   return todayUTC.toISOString().split('T')[0];
 }
 
+export const timeStringToInteger = (timeString = timeToString()) => {
+  // 2021-05-28
+
+  const year = parseInt(timeString.substr(0, 4));
+  const month = parseInt(timeString.substr(5, 2));
+  const day = parseInt(timeString.substr(8, 2));
+
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getTime();
+};
+
 const MetricIcon = styled.View`
   margin: 0 30px;
 `;
