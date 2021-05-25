@@ -8,9 +8,8 @@ const entries = (state = {}, action) => {
       return { ...state, ...action.entry };
     case REMOVE_ENTRY: {
       const newState = { ...state };
-      newState[action.key] = undefined;
-      delete newState[action.key];
-      console.log('Reducer ', newState);
+      newState[action.key] = null;
+      // delete newState[action.key];
       return newState;
     }
     default:

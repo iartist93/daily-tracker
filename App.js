@@ -16,8 +16,8 @@ import { handleRecieveEntries } from './redux/actions/entries.a';
 //------------------------------------------------------
 export default function App() {
   const Tab = createBottomTabNavigator();
-  const AddNewRoute = () => <AddEntry />;
-  const HistoryRoute = () => <History />;
+  const AddNewRoute = (props) => <AddEntry {...props} />;
+  const HistoryRoute = (props) => <History {...props} />;
 
   useEffect(() => {
     // load data from db and save it in the store

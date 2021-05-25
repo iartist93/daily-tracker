@@ -75,7 +75,7 @@ const AddEntry = ({ isAlreadyLogged, dispatch, navigation }) => {
     const key = timeToString();
     dispatch(handleAddEntry(key, metrics));
     resetComponentState();
-    navigation.navigation('/History');
+    navigation.navigate('History');
   };
 
   const handleReset = () => {
@@ -139,11 +139,12 @@ const AddEntry = ({ isAlreadyLogged, dispatch, navigation }) => {
 };
 
 const mapStateToProps = (state) => {
-  const entryIndex = Object.keys(state.entries).findIndex(
-    (key) => key === timeToString()
+  const [key, value] = Object.entries(state.entries).find(
+    ([key, value]) => key === timeToString()
   );
+
   return {
-    isAlreadyLogged: state.entries === {} || entryIndex >= 0,
+    isAlreadyLogged: value !== null,
   };
 };
 
